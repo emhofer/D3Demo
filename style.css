@@ -1,10 +1,3 @@
-rect {
-        fill: steelblue;
-        fill-opacity: 0.8;
-      }
-      rect:hover {
-        fill-opacity: 1;
-      }
-      .axis {
-        font-size: smaller;
-      }
+.bar {
+  fill: steelblue;
+}
