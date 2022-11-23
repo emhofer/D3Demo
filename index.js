@@ -1,41 +1,76 @@
-const width = document.querySelector("body").clientWidth;
-const height = 500;
-const margin = { top: 50, right: 100, bottom: 50, left: 100 };
+const margin = { top: 50, right: 100, bottom: 50, left: 50 };
+const width = 500;
+const height = 200;
 
-const x_scale = d3
-  .scaleBand()
-  .range([margin.left, width - margin.right])
-  .padding(0.1);
+let prices = [];
 
-const y_scale = d3.scaleLinear().range([height - margin.bottom, margin.top]);
+let res = d3
+  .csv("TSLA.csv", (d) => {
+    return {
+      date: d3.timeParse("%Y-%m-%d")(d.Date),
+      upper: +d.High,
+      close: +d.Close,
+    };
+  })
+  .then((data) => {
+    prices = data;
+  })
+  .then(() => everythingElse());
 
-const svg = d3.select("#d3_demo").attr("viewBox", [0, 0, width, height]);
+const everythingElse = () => {
+  // Add X axis --> it is a date format
+  var x = d3
+    .scaleTime()
+    .domain(
+      d3.extent(prices, function (d) {
+        return d.date;
+      })
+    )
+    .range([0, width]);
 
-const xAxis = d3.axisBottom(x_scale);
-const yAxis = d3.axisLeft(y_scale);
+  // Add Y axis
+  var y = d3
+    .scaleLinear()
+    .domain([
+      0,
+      d3.max(prices, function (d) {
+        return d.close;
+      }),
+    ])
+    .range([height, 0]);
 
-d3.json("data.json").then(({ data }) => {
-  data.forEach((d) => (d.Population = d.info.Population));
+  const line = d3
+    .line()
+    .x((d) => x(d.date))
+    .y((d) => y(d.close));
 
-  // Scale the Domain
-  x_scale.domain(data.map((d) => d.Name));
-  y_scale.domain([0, d3.max(data, (d) => d.Population)]);
+  const svg = d3
+    .select("#d3")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
 
-  // add the rectangles for the bar chart
   svg
-    .selectAll("rect")
-    .data(data)
-    .join("rect")
-    .attr("class", "bar")
-    .attr("x", (d) => x_scale(d.Name))
-    .attr("y", (d) => y_scale(d.Population))
-    .attr("width", x_scale.bandwidth())
-    .attr("height", (d) => height - margin.bottom - y_scale(d.Population));
-
+    .append("path")
+    .datum(prices)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr(
+      "d",
+      d3
+        .line()
+        .x(function (d) {
+          return x(d.date);
+        })
+        .y(function (d) {
+          return y(d.close);
+        })
+    );
   svg
     .append("g")
-    .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(xAxis);
-
-  svg.append("g").attr("transform", `translate(${margin.left},0)`).call(yAxis);
-});
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+  svg.append("g").call(d3.axisLeft(y));
+};
