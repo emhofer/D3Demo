@@ -45,7 +45,7 @@ const everythingElse = () => {
     .y((d) => y(d.close));
 
   const svg = d3
-    .select("#d3")
+    .select("#d3line")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
