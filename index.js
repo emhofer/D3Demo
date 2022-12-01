@@ -1,0 +1,26 @@
+const DUMMY_DATA = [
+  { id: "d1", value: 10, region: "Austria" },
+  { id: "d1", value: 15, region: "Germany" },
+  { id: "d1", value: 12, region: "Slovenia" },
+  { id: "d1", value: 6, region: "Italy" },
+];
+
+const container = d3.select("#d3bar").classed("container", true);
+
+const xScale = d3
+  .scaleBand()
+  .domain(DUMMY_DATA.map((data) => data.region))
+  .range([0, 250])
+  .padding(0.1);
+const yScale = d3.scaleLinear().domain([0, 20]).range([200, 0]);
+
+container
+  .selectAll(".bar")
+  .data(DUMMY_DATA)
+  .enter()
+  .append("rect")
+  .classed("bar", true)
+  .attr("width", xScale.bandwidth())
+  .attr("height", (data) => 200 - yScale(data.value))
+  .attr("x", (data) => xScale(data.region))
+  .attr("y", (data) => yScale(data.value));
