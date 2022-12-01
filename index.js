@@ -1,8 +1,9 @@
 const DUMMY_DATA = [
   { id: "d1", value: 10, region: "Austria" },
-  { id: "d1", value: 15, region: "Germany" },
-  { id: "d1", value: 12, region: "Slovenia" },
-  { id: "d1", value: 6, region: "Italy" },
+  { id: "d2", value: 15, region: "Germany" },
+  { id: "d3", value: 12, region: "Slovenia" },
+  { id: "d4", value: 6, region: "Italy" },
+  { id: "d5", value: 8, region: "Slovakia" },
 ];
 
 const container = d3.select("#d3bar").classed("container", true);
