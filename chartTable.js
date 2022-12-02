@@ -6,6 +6,8 @@ const TABLE_DATA = [
   { id: "d5", value: 15, region: "Tyrol" },
 ];
 
+const titles = Object.keys(TABLE_DATA[0]);
+
 const containerTable = d3
   .select("#d3table")
   .append("div")
@@ -14,14 +16,14 @@ const containerTable = d3
 containerTable
   .append("tr")
   .selectAll("th")
-  .data(Object.keys(TABLE_DATA[0]))
+  .data(titles)
   .enter()
   .append("th")
   .text((d) => d)
   .style("text-transform", "capitalize");
 
 const rows = containerTable
-  .selectAll("tr")
+  .selectAll("div")
   .data(TABLE_DATA)
   .enter()
   .append("tr");
