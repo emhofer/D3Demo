@@ -1,16 +1,32 @@
+html {
+    font-family: sans-serif;
+}
+
+#dashboard {
+    width: 250px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .container {
     width: 250px;
     height: 200px;
- border: 1px solid steelblue;
+    border: 1px solid steelblue;
 }
 
 .bar {
     fill: steelblue
 }
 
-#dashboard {
-    width: 510px;
+#d3table {
+    grid-column: 2 / 4;
+    height: 200px;
+    border: 1px solid steelblue;
+}
+
+#d3table tr {
     display: grid;
-    gap: 10px;
-    grid-template-columns: 2fr 2fr;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
 }
