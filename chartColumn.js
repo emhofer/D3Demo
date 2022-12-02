@@ -26,3 +26,13 @@ container
   .attr("x", (data) => xScale(data.region))
   .attr("y", (data) => yScale(data.value))
   .text((data) => data.region);
+
+container
+  .selectAll("text")
+  .data(COLUMN_DATA)
+  .enter()
+  .append("text")
+  .attr("x", (data) => xScale(data.region))
+  .attr("y", (data) => yScale(data.value) - 10)
+  .text((data) => data.region)
+  .style("font-size", "10");
