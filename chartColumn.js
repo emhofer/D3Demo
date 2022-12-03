@@ -8,15 +8,12 @@ const COLUMN_DATA = [
 
 const container = d3.select("#d3column").classed("container", true);
 
-const containerAxes = container
-  .append("g")
-  .attr("transform", "translate(0,170)");
-
 const xScale = d3
   .scaleBand()
   .domain(COLUMN_DATA.map((data) => data.region))
   .range([0, 250])
   .padding(0.1);
+
 const yScale = d3.scaleLinear().domain([0, 20]).range([170, 0]);
 
 container
@@ -41,7 +38,12 @@ container
   .text((data) => data.value)
   .style("font-size", "10")
   .style("fill", "white")
-  .attr("text-anchor", "middle")
+  .attr("text-anchor", "middle");
+
+const containerAxes = container
+  .append("g")
+  .attr("transform", "translate(0,170)");
 
 const xAxis = d3.axisBottom(xScale);
+
 containerAxes.call(xAxis);
