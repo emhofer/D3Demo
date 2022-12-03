@@ -53,6 +53,7 @@ path:hover:not(.line) {
 .header {
     margin-bottom: 1rem;
 }
+
 .header span {
     padding: 2px;
     border: 1px solid grey;
