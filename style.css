@@ -34,6 +34,7 @@ path:hover:not(.line) {
 
 .line:hover {
     stroke: navy;
+    stroke-width: 3;
 }
 
 #d3table {
