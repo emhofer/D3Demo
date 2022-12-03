@@ -47,4 +47,5 @@ path:hover:not(.line) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: left;
+    border-bottom: 1px dashed lightgray;
 }
