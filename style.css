@@ -49,3 +49,13 @@ path:hover:not(.line) {
     text-align: left;
     border-bottom: 1px dashed lightgray;
 }
+
+.header {
+    margin-bottom: 1rem;
+}
+.header span {
+    padding: 2px;
+    border: 1px solid grey;
+    background-color: lightgrey;
+    border-radius: 2px;
+}
