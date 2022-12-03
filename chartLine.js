@@ -19,6 +19,7 @@ const linePath = d3
 
 container3
   .append("path")
+  .classed("line", true)
   .data(LINE_DATA)
   .attr("fill", "none")
   .attr("stroke", "steelblue")

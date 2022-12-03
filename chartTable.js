@@ -15,6 +15,7 @@ const containerTable = d3
 
 containerTable
   .append("tr")
+  .classed("thead", true)
   .selectAll("th")
   .data(titles)
   .enter()

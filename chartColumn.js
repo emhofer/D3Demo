@@ -8,12 +8,16 @@ const COLUMN_DATA = [
 
 const container = d3.select("#d3column").classed("container", true);
 
+const containerAxes = container
+  .append("g")
+  .attr("transform", "translate(0,170)");
+
 const xScale = d3
   .scaleBand()
   .domain(COLUMN_DATA.map((data) => data.region))
   .range([0, 250])
   .padding(0.1);
-const yScale = d3.scaleLinear().domain([0, 20]).range([200, 0]);
+const yScale = d3.scaleLinear().domain([0, 20]).range([170, 0]);
 
 container
   .selectAll(".bar")
@@ -22,7 +26,7 @@ container
   .append("rect")
   .classed("bar", true)
   .attr("width", xScale.bandwidth())
-  .attr("height", (data) => 200 - yScale(data.value))
+  .attr("height", (data) => 170 - yScale(data.value))
   .attr("x", (data) => xScale(data.region))
   .attr("y", (data) => yScale(data.value))
   .text((data) => data.region);
@@ -32,7 +36,12 @@ container
   .data(COLUMN_DATA)
   .enter()
   .append("text")
-  .attr("x", (data) => xScale(data.region))
-  .attr("y", (data) => yScale(data.value) - 10)
-  .text((data) => data.region)
-  .style("font-size", "10");
+  .attr("x", (data) => xScale(data.region) + xScale.bandwidth() / 2)
+  .attr("y", (data) => 165)
+  .text((data) => data.value)
+  .style("font-size", "10")
+  .style("fill", "white")
+  .attr("text-anchor", "middle")
+
+const xAxis = d3.axisBottom(xScale);
+containerAxes.call(xAxis);

@@ -19,6 +19,23 @@ html {
     fill: steelblue
 }
 
+.bar:hover {
+    fill: navy;
+}
+
+tr:hover:not(.thead) {
+    background-color: navy;
+    color: white
+}
+
+path:hover:not(.line) {
+    fill: navy;
+}
+
+.line:hover {
+    stroke: navy;
+}
+
 #d3table {
     grid-column: 2 / 4;
     height: 200px;
