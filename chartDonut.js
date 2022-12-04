@@ -10,14 +10,22 @@ const containerDonut = d3
   .select("#d3donut")
   .classed("container", true)
   .append("g")
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  .attr(
+    "transform",
+    "translate(" + width / 2 + "," + (height / 2 + marginTitle.top / 2) + ")"
+  );
+
+d3.select("#d3donut")
+  .append("text")
+  .text("Title")
+  .attr("transform", `translate(${marginTitle.left},${marginTitle.top})`);
 
 const ordScaleDonut = d3.scaleOrdinal(DONUT_DATA.map((d) => d.color));
 
 const arc = d3
   .arc()
-  .innerRadius(height / 4)
-  .outerRadius(height / 2);
+  .innerRadius((height - marginTitle.top - 5) / 4)
+  .outerRadius((height - marginTitle.top - 5) / 2);
 
 const counts = DONUT_DATA.map((d) => d.count);
 
@@ -28,6 +36,7 @@ containerDonut
   .data(pie(counts))
   .enter()
   .append("path")
+  .classed("slice", true)
   .attr("fill", (d, i) => DONUT_DATA[i].color)
   .attr("d", arc);
 

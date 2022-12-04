@@ -9,9 +9,18 @@ const COLUMN_DATA = [
 const width = 300;
 const height = 200;
 
+const dataMaxColumn = Math.max(...COLUMN_DATA.map((d) => d.value));
+
 const marginColumn = { top: 0, right: 0, bottom: 30, left: 0 };
 
+const marginTitle = { top: 20, left: 10 };
+
 const containerColumn = d3.select("#d3column").classed("container", true);
+
+containerColumn
+  .append("text")
+  .text("Title")
+  .attr("transform", `translate(${marginTitle.left},${marginTitle.top})`);
 
 const xScaleColumn = d3
   .scaleBand()
@@ -21,8 +30,8 @@ const xScaleColumn = d3
 
 const yScaleColumn = d3
   .scaleLinear()
-  .domain([0, 20])
-  .range([height - marginColumn.bottom, 0]);
+  .domain([0, dataMaxColumn])
+  .range([height - marginColumn.bottom, marginTitle.top + 5]);
 
 containerColumn
   .selectAll(".bar")
@@ -40,12 +49,12 @@ containerColumn
   .text((data) => data.region);
 
 containerColumn
-  .selectAll("text")
+  .selectAll("label")
   .data(COLUMN_DATA)
   .enter()
   .append("text")
   .attr("x", (data) => xScaleColumn(data.region) + xScaleColumn.bandwidth() / 2)
-  .attr("y", (height - marginColumn.bottom - 5))
+  .attr("y", height - marginColumn.bottom - 5)
   .text((data) => data.value)
   .style("font-size", "10")
   .style("fill", "white")

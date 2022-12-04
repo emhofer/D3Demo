@@ -23,7 +23,9 @@ const scrollDiv = d3.select("#d3table").style("overflow", "scroll");
 const containerTable = d3
   .select("#d3table")
   .append("div")
-  .style("padding", "10px");
+  .style("padding", "5px 10px 10px 10px");
+
+containerTable.append("text").text("Title");
 
 containerTable
   .append("tr")

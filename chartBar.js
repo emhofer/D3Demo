@@ -1,24 +1,32 @@
 const BAR_DATA = [
   { id: "d1", value: 3, region: "Vienna" },
-  { id: "d2", value: 6, region: "Salzburg" },
+  { id: "d2", value: 20, region: "Salzburg" },
   { id: "d3", value: 9, region: "Upper Austria" },
   { id: "d4", value: 12, region: "Lower Austria" },
   { id: "d5", value: 15, region: "Tyrol" },
 ];
 
-const marginBar = { top: 0, right: 0, bottom: 0, left: 75 };
+const dataMaxBar = Math.max(...BAR_DATA.map((d) => d.value));
+
+
+const marginBar = { top: 0, right: 5, bottom: 0, left: 75 };
 
 const containerBar = d3.select("#d3bar").classed("container", true);
 
+containerBar
+  .append("text")
+  .text("Title")
+  .attr("transform", `translate(${marginTitle.left},${marginTitle.top})`);
+
 const xScaleBar = d3
   .scaleLinear()
-  .domain([0, 20])
-  .range([0, width - marginBar.left]);
+  .domain([0, dataMaxBar])
+  .range([0, width - marginBar.left - marginBar.right]);
 
 const yScaleBar = d3
   .scaleBand()
   .domain(BAR_DATA.map((data) => data.region))
-  .range([0, height])
+  .range([marginTitle.top + 5, height])
   .padding(0.1);
 
 containerBar
@@ -34,7 +42,7 @@ containerBar
   .text((data) => data.region);
 
 containerBar
-  .selectAll("text")
+  .selectAll("label")
   .data(BAR_DATA)
   .enter()
   .append("text")

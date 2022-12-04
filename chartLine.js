@@ -5,20 +5,33 @@ const LINE_DATA = [
   { id: 3, value: 9 },
   { id: 4, value: 14 },
   { id: 5, value: 6 },
+  { id: 6, value: 12 },
+  { id: 7, value: 14 },
 ];
 
-const marginLine = { top: 25, right: 25, bottom: 25, left: 25 };
+const dataMaxLine = {
+  x: Math.max(...LINE_DATA.map((d) => d.id)),
+  y: Math.max(...LINE_DATA.map((d) => d.value)),
+};
+
+const marginLine = { top: 10, right: 25, bottom: 25, left: 25 };
 
 const containerLine = d3.select("#d3line").classed("container", true);
 
+containerLine
+  .append("text")
+  .text("Title")
+  .attr("transform", `translate(${marginTitle.left},${marginTitle.top})`);
+
 const xScaleLine = d3
   .scaleLinear()
-  .domain([0, 5])
+  .domain([0, dataMaxLine.x])
   .range([marginLine.left, width - marginLine.right]);
+
 const yScaleLine = d3
   .scaleLinear()
-  .domain([0, 20])
-  .range([height - marginLine.bottom, marginLine.top]);
+  .domain([0, dataMaxLine.y])
+  .range([height - marginLine.bottom, marginLine.top + marginTitle.top + 5]);
 
 const linePath = d3
   .line()
