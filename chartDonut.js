@@ -51,5 +51,5 @@ containerDonut
   )
   .text((d, i) => DONUT_DATA[i].region)
   .style("text-anchor", "middle")
-  .style("font-size", "10")
+  .style("font-size", "10px")
   .attr("fill", "white");

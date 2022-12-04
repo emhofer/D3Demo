@@ -49,7 +49,7 @@ containerBar
   .attr("x", marginBar.left + 5)
   .attr("y", (data) => yScaleBar(data.region) + yScaleBar.bandwidth() / 2 + 3)
   .text((data) => data.value)
-  .style("font-size", "10")
+  .style("font-size", "10px")
   .style("fill", "white");
 
 const containerBarAxes = containerBar

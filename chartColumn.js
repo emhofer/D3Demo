@@ -56,7 +56,7 @@ containerColumn
   .attr("x", (data) => xScaleColumn(data.region) + xScaleColumn.bandwidth() / 2)
   .attr("y", height - marginColumn.bottom - 5)
   .text((data) => data.value)
-  .style("font-size", "10")
+  .style("font-size", "10px")
   .style("fill", "white")
   .attr("text-anchor", "middle");
 
