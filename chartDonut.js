@@ -1,29 +1,46 @@
 const DONUT_DATA = [
-  { color: "#2471A3", count: 3 },
-  { color: "#2980B9", count: 2 },
-  { color: "#5499C7", count: 2 },
-  { color: "#7FB3D5", count: 1 },
-  { color: "#A9CCE3", count: 1 },
+  { color: "#2471A3", count: 3, region: "Austria" },
+  { color: "#2980B9", count: 2, region: "Germany" },
+  { color: "#5499C7", count: 2, region: "Slovakia" },
+  { color: "#7FB3D5", count: 1, region: "Italy" },
+  { color: "#A9CCE3", count: 1, region: "Slovenia" },
 ];
 
-const container4 = d3
+const containerDonut = d3
   .select("#d3donut")
   .classed("container", true)
   .append("g")
-  .attr("transform", "translate(" + 250 / 2 + "," + 200 / 2 + ")");
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-const ordScale = d3.scaleOrdinal(DONUT_DATA.map((d) => d.color));
+const ordScaleDonut = d3.scaleOrdinal(DONUT_DATA.map((d) => d.color));
 
-const arc = d3.arc().innerRadius(50).outerRadius(100);
+const arc = d3
+  .arc()
+  .innerRadius(height / 4)
+  .outerRadius(height / 2);
 
 const counts = DONUT_DATA.map((d) => d.count);
 
 const pie = d3.pie();
 
-container4
+containerDonut
   .selectAll("section")
   .data(pie(counts))
   .enter()
   .append("path")
   .attr("fill", (d, i) => DONUT_DATA[i].color)
   .attr("d", arc);
+
+containerDonut
+  .selectAll("section")
+  .data(pie(counts))
+  .enter()
+  .append("text")
+  .attr(
+    "transform",
+    (d) => `translate(${arc.centroid(d)[0] + "," + arc.centroid(d)[1]})`
+  )
+  .text((d, i) => DONUT_DATA[i].region)
+  .style("text-anchor", "middle")
+  .style("font-size", "10")
+  .attr("fill", "white");

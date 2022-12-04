@@ -6,44 +6,55 @@ const COLUMN_DATA = [
   { id: "d5", value: 8, region: "Slovakia" },
 ];
 
-const container = d3.select("#d3column").classed("container", true);
+const width = 300;
+const height = 200;
 
-const xScale = d3
+const marginColumn = { top: 0, right: 0, bottom: 30, left: 0 };
+
+const containerColumn = d3.select("#d3column").classed("container", true);
+
+const xScaleColumn = d3
   .scaleBand()
   .domain(COLUMN_DATA.map((data) => data.region))
-  .range([0, 250])
+  .range([0, width])
   .padding(0.1);
 
-const yScale = d3.scaleLinear().domain([0, 20]).range([170, 0]);
+const yScaleColumn = d3
+  .scaleLinear()
+  .domain([0, 20])
+  .range([height - marginColumn.bottom, 0]);
 
-container
+containerColumn
   .selectAll(".bar")
   .data(COLUMN_DATA)
   .enter()
   .append("rect")
   .classed("bar", true)
-  .attr("width", xScale.bandwidth())
-  .attr("height", (data) => 170 - yScale(data.value))
-  .attr("x", (data) => xScale(data.region))
-  .attr("y", (data) => yScale(data.value))
+  .attr("width", xScaleColumn.bandwidth())
+  .attr(
+    "height",
+    (data) => height - marginColumn.bottom - yScaleColumn(data.value)
+  )
+  .attr("x", (data) => xScaleColumn(data.region))
+  .attr("y", (data) => yScaleColumn(data.value))
   .text((data) => data.region);
 
-container
+containerColumn
   .selectAll("text")
   .data(COLUMN_DATA)
   .enter()
   .append("text")
-  .attr("x", (data) => xScale(data.region) + xScale.bandwidth() / 2)
-  .attr("y", (data) => 165)
+  .attr("x", (data) => xScaleColumn(data.region) + xScaleColumn.bandwidth() / 2)
+  .attr("y", (height - marginColumn.bottom - 5))
   .text((data) => data.value)
   .style("font-size", "10")
   .style("fill", "white")
   .attr("text-anchor", "middle");
 
-const containerAxes = container
+const containerColumnAxes = containerColumn
   .append("g")
-  .attr("transform", "translate(0,170)");
+  .attr("transform", `translate(0,${height - marginColumn.bottom})`);
 
-const xAxis = d3.axisBottom(xScale);
+const xAxisColumn = d3.axisBottom(xScaleColumn);
 
-containerAxes.call(xAxis);
+containerColumnAxes.call(xAxisColumn);
