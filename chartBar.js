@@ -1,15 +1,6 @@
-const BAR_DATA = [
-  { id: "d1", value: 3, region: "Vienna" },
-  { id: "d2", value: 20, region: "Salzburg" },
-  { id: "d3", value: 9, region: "Upper Austria" },
-  { id: "d4", value: 12, region: "Lower Austria" },
-  { id: "d5", value: 15, region: "Tyrol" },
-];
+const dataMaxBar = Math.max(...DASHBOARD_DATA.map((d) => d.value));
 
-const dataMaxBar = Math.max(...BAR_DATA.map((d) => d.value));
-
-
-const marginBar = { top: 0, right: 5, bottom: 0, left: 75 };
+const marginBar = { top: 0, right: 5, bottom: 0, left: 20 };
 
 const containerBar = d3.select("#d3bar").classed("container", true);
 
@@ -25,13 +16,13 @@ const xScaleBar = d3
 
 const yScaleBar = d3
   .scaleBand()
-  .domain(BAR_DATA.map((data) => data.region))
+  .domain(DASHBOARD_DATA.map((data) => data.region))
   .range([marginTitle.top + 5, height])
   .padding(0.1);
 
 containerBar
   .selectAll(".bar")
-  .data(BAR_DATA)
+  .data(DASHBOARD_DATA)
   .enter()
   .append("rect")
   .classed("bar", true)
@@ -43,7 +34,7 @@ containerBar
 
 containerBar
   .selectAll("label")
-  .data(BAR_DATA)
+  .data(DASHBOARD_DATA)
   .enter()
   .append("text")
   .attr("x", marginBar.left + 5)

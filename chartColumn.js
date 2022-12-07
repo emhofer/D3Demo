@@ -1,15 +1,27 @@
-const COLUMN_DATA = [
-  { id: "d1", value: 10, region: "Austria" },
-  { id: "d2", value: 15, region: "Germany" },
-  { id: "d3", value: 12, region: "Slovenia" },
-  { id: "d4", value: 6, region: "Italy" },
-  { id: "d5", value: 8, region: "Slovakia" },
+const DASHBOARD_DATA = [
+  { id: "d1", value: 3, region: "a" },
+  { id: "d2", value: 6, region: "b" },
+  { id: "d3", value: 9, region: "c" },
+  { id: "d4", value: 12, region: "d" },
+  { id: "d5", value: 15, region: "e" },
+  { id: "d6", value: 17, region: "f" },
+  { id: "d7", value: 4, region: "g" },
+  { id: "d8", value: 23, region: "h" },
+  { id: "d9", value: 5, region: "i" },
+  { id: "d10", value: 11, region: "j" },
+  { id: "d11", value: 2, region: "k" },
+  { id: "d12", value: 17, region: "l" },
+  { id: "d13", value: 22, region: "m" },
+  { id: "d14", value: 8, region: "n" },
+  { id: "d15", value: 10, region: "o" },
 ];
+
+const dataLength = DASHBOARD_DATA.length;
 
 const width = 300;
 const height = 200;
 
-const dataMaxColumn = Math.max(...COLUMN_DATA.map((d) => d.value));
+const dataMaxColumn = Math.max(...DASHBOARD_DATA.map((d) => d.value));
 
 const marginColumn = { top: 0, right: 0, bottom: 30, left: 0 };
 
@@ -24,7 +36,7 @@ containerColumn
 
 const xScaleColumn = d3
   .scaleBand()
-  .domain(COLUMN_DATA.map((data) => data.region))
+  .domain(DASHBOARD_DATA.map((data) => data.region))
   .range([0, width])
   .padding(0.1);
 
@@ -35,7 +47,7 @@ const yScaleColumn = d3
 
 containerColumn
   .selectAll(".bar")
-  .data(COLUMN_DATA)
+  .data(DASHBOARD_DATA)
   .enter()
   .append("rect")
   .classed("bar", true)
@@ -50,7 +62,7 @@ containerColumn
 
 containerColumn
   .selectAll("label")
-  .data(COLUMN_DATA)
+  .data(DASHBOARD_DATA)
   .enter()
   .append("text")
   .attr("x", (data) => xScaleColumn(data.region) + xScaleColumn.bandwidth() / 2)

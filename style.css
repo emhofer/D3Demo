@@ -23,20 +23,22 @@ html {
 }
 
 .bar:hover {
-    fill: navy;
+    fill: darkorange;
 }
 
 tr:hover:not(.thead) {
-    background-color: navy;
+    background-color: darkorange;
     color: white
 }
 
 .slice:hover {
-    fill: navy;
+    fill: darkorange;
+    ;
 }
 
 .line:hover {
-    stroke: navy;
+    stroke: darkorange;
+    ;
     stroke-width: 3;
 }
 

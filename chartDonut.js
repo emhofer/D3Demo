@@ -1,10 +1,6 @@
-const DONUT_DATA = [
-  { color: "#2471A3", count: 3, region: "Austria" },
-  { color: "#2980B9", count: 2, region: "Germany" },
-  { color: "#5499C7", count: 2, region: "Slovakia" },
-  { color: "#7FB3D5", count: 1, region: "Italy" },
-  { color: "#A9CCE3", count: 1, region: "Slovenia" },
-];
+const DONUT_DATA = DASHBOARD_DATA.map((d) => d).sort((a, b) =>
+  a.value > b.value ? -1 : 1
+);
 
 const containerDonut = d3
   .select("#d3donut")
@@ -20,14 +16,14 @@ d3.select("#d3donut")
   .text("Title")
   .attr("transform", `translate(${marginTitle.left},${marginTitle.top})`);
 
-const ordScaleDonut = d3.scaleOrdinal(DONUT_DATA.map((d) => d.color));
+const ordScaleDonut = d3.scaleOrdinal(DONUT_DATA.map((d) => d.id));
 
 const arc = d3
   .arc()
   .innerRadius((height - marginTitle.top - 5) / 4)
   .outerRadius((height - marginTitle.top - 5) / 2);
 
-const counts = DONUT_DATA.map((d) => d.count);
+const counts = DONUT_DATA.map((d) => d.value);
 
 const pie = d3.pie();
 
@@ -37,7 +33,7 @@ containerDonut
   .enter()
   .append("path")
   .classed("slice", true)
-  .attr("fill", (d, i) => DONUT_DATA[i].color)
+  .attr("fill", (d, i) => d3.interpolateBlues(1 - (1 / dataLength) * i))
   .attr("d", arc);
 
 containerDonut
