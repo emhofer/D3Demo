@@ -1,0 +1,17 @@
+[
+  { "id": "d1", "value": 3, "region": "a" },
+  { "id": "d2", "value": 6, "region": "b" },
+  { "id": "d3", "value": 9, "region": "c" },
+  { "id": "d4", "value": 12, "region": "d" },
+  { "id": "d5", "value": 15, "region": "e" },
+  { "id": "d6", "value": 17, "region": "f" },
+  { "id": "d7", "value": 4, "region": "g" },
+  { "id": "d8", "value": 23, "region": "h" },
+  { "id": "d9", "value": 5, "region": "i" },
+  { "id": "d10", "value": 11, "region": "j" },
+  { "id": "d11", "value": 2, "region": "k" },
+  { "id": "d12", "value": 17, "region": "l" },
+  { "id": "d13", "value": 22, "region": "m" },
+  { "id": "d14", "value": 8, "region": "n" },
+  { "id": "d15", "value": 10, "region": "o" }
+]

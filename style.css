@@ -4,7 +4,7 @@ html {
 
 #dashboard {
     margin-top: 1rem;
-    width: 250px;
+    width: 0;
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -44,7 +44,6 @@ tr:hover:not(.thead) {
 
 #d3table {
     grid-column: 2 / 4;
-    height: 200px;
     border-radius: 5px;
     box-shadow: 0 0 5px grey;
     padding: 5px;
