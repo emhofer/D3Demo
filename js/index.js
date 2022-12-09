@@ -5,7 +5,7 @@ import buildLine from "./chartLine.js";
 import buildTable from "./chartTable.js";
 
 const buildDashboard = async () => {
-  const size = { width: 300, height: 200 };
+  const size = { width: 250, height: 200 };
   const data = await d3.json("data.json");
   buildBar(data, size);
   buildColumn(data, size);

@@ -5,7 +5,7 @@ const buildLine = (DASHBOARD_DATA, size) => {
     y: Math.max(...DASHBOARD_DATA.map((d) => d.value)),
   };
 
-  const marginLine = { top: 10, right: 25, bottom: 25, left: 25 };
+  const marginLine = { top: 10, right: 10, bottom: 25, left: 25 };
   const marginTitle = { top: 20, left: 10 };
 
   const containerLine = d3.select("#d3line").classed("container", true);
